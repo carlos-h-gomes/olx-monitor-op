@@ -2,6 +2,10 @@
 
 Extensão para Chrome e Edge que vigia as suas buscas da OLX e coloca na sua tela, na hora, o anúncio novo que vale a pena. Também avisa no celular, de graça.
 
+![Demonstração: monitorar uma busca, alerta de anúncio abaixo da média e alerta de preço suspeito](docs/demo.gif)
+
+**[Baixar a última versão](https://github.com/carlos-h-gomes/olx-monitor-op/releases/latest)**
+
 Você faz a busca na OLX do jeito que quiser (região, faixa de preço, entrega, condição), clica em **Monitorar esta busca** e pronto. A cada 5 minutos a extensão lê essa busca. Quando aparece um anúncio novo que passa nos seus filtros, abre um alerta com a foto, o preço e quanto ele está abaixo da média daquela busca.
 
 ## O que ela faz
@@ -17,17 +21,17 @@ Você faz a busca na OLX do jeito que quiser (região, faixa de preço, entrega,
 
 A extensão não está nas lojas. Você instala direto daqui, leva um minuto.
 
-1. Baixe o projeto: botão verde **Code** no topo desta página, depois **Download ZIP**. Descompacte numa pasta que você não vá apagar.
+1. Baixe o arquivo `olx-monitor-op-vX.Y.Z.zip` da [última versão](https://github.com/carlos-h-gomes/olx-monitor-op/releases/latest) e descompacte numa pasta que você não vá apagar.
 2. No Chrome, abra `chrome://extensions`. No Edge, `edge://extensions`.
 3. Ligue o **Modo do desenvolvedor** (canto superior direito no Chrome, menu lateral no Edge).
-4. Clique em **Carregar sem compactação** e escolha a pasta `extension` que está dentro do que você descompactou.
+4. Clique em **Carregar sem compactação** e escolha a pasta `olx-monitor-op` que saiu do ZIP.
 5. Clique no ícone de quebra-cabeça da barra e fixe o **Olx Monitor OP**.
 
 A página de configurações abre sozinha na primeira vez.
 
 ### Atualizar
 
-Baixe o ZIP de novo, substitua a pasta e clique no botão de recarregar da extensão em `chrome://extensions`. Suas buscas e configurações continuam lá.
+Baixe o ZIP da versão nova, substitua o conteúdo da pasta e clique no botão de recarregar da extensão em `chrome://extensions`. Suas buscas e configurações continuam lá.
 
 ## Como usar
 
@@ -62,6 +66,8 @@ Sem build e sem dependências. A pasta `extension` é carregada direto no navega
 npm test        # testes do núcleo (Node 18+)
 npm run guard   # checa dado pessoal e segredo antes de publicar
 ```
+
+Para publicar uma versão, suba a `version` do `extension/manifest.json` e envie a tag correspondente (`git tag v0.2.0 && git push --tags`). O GitHub Actions roda os testes, monta o ZIP e cria a release sozinho.
 
 O código que entende a página da OLX fica isolado em `extension/lib/sites/olx.js`. Para suportar outro site, crie um adaptador com a mesma interface e registre em `extension/lib/sites/index.js`.
 
