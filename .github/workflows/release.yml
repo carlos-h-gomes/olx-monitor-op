@@ -1,0 +1,44 @@
+name: release
+
+# Ao enviar uma tag vX.Y.Z, gera o ZIP so com a pasta da extensao
+# e publica uma release com ele. Sem servico externo: so o gh do runner.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Testes e verificação de dados pessoais
+        run: |
+          node --test tests/*.test.mjs
+          node scripts/public-guard.mjs
+
+      - name: Confere a versão do manifest com a tag
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          MANIFEST=$(node -p "require('./extension/manifest.json').version")
+          if [ "$TAG" != "$MANIFEST" ]; then
+            echo "A tag ($TAG) não bate com a versão do manifest.json ($MANIFEST)."
+            exit 1
+          fi
+
+      - name: Monta o ZIP
+        run: |
+          mkdir -p dist/olx-monitor-op
+          cp -r extension/. dist/olx-monitor-op/
+          cd dist && zip -qr "olx-monitor-op-${GITHUB_REF_NAME}.zip" olx-monitor-op
+
+      - name: Publica a release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" "dist/olx-monitor-op-${GITHUB_REF_NAME}.zip" \
+            --title "Olx Monitor OP ${GITHUB_REF_NAME}" \
+            --notes "Baixe o arquivo **olx-monitor-op-${GITHUB_REF_NAME}.zip** abaixo, descompacte e carregue a pasta **olx-monitor-op** em chrome://extensions (Modo do desenvolvedor > Carregar sem compactação). Passo a passo no [README](https://github.com/${GITHUB_REPOSITORY}#instalação)."
