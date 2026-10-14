@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "Olx Monitor OP",
+  "short_name": "Olx Monitor",
+  "version": "0.1.0",
+  "description": "Vigia as suas buscas da OLX e avisa na hora, na tela e no celular, quando aparece anúncio novo abaixo da média.",
+  "minimum_chrome_version": "116",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "action": {
+    "default_title": "Olx Monitor OP",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png"
+    }
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": ["storage", "alarms", "notifications", "offscreen"],
+  "host_permissions": [
+    "https://*.olx.com.br/*",
+    "https://img.olx.com.br/*",
+    "https://ntfy.sh/*",
+    "https://api.telegram.org/*"
+  ],
+  "optional_host_permissions": ["https://*/*"]
+}

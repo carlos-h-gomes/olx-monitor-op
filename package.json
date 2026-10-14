@@ -1,0 +1,13 @@
+{
+  "name": "olx-monitor-op",
+  "private": true,
+  "type": "module",
+  "description": "Extensão que vigia buscas da OLX e avisa anúncio novo abaixo da média.",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "guard": "node scripts/public-guard.mjs",
+    "check": "node --test tests/*.test.mjs && node scripts/public-guard.mjs"
+  },
+  "engines": { "node": ">=18" }
+}
