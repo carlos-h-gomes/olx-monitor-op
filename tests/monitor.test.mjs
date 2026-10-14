@@ -41,7 +41,7 @@ test("filtros: palavras, acento, vendedor e idade", () => {
   assert.equal(rejectReason(ad(1, 10), s, { now }), null);
   assert.match(rejectReason(ad(1, 10, { title: "RTX 3080" }), s, { now }), /3090/);
   assert.match(rejectReason(ad(1, 10, { title: "RTX 3090 com DEFEITO" }), s, { now }), /defeito/);
-  assert.match(rejectReason(ad(1, 10, { title: "RTX 3090 não liga" }), search(), { now, globalBlocked: DEFAULT_BLOCKED }), /nao liga/);
+  assert.match(rejectReason(ad(1, 10, { title: "RTX 3090 não liga" }), search(), { now, globalBlocked: DEFAULT_BLOCKED }), /não liga/);
   assert.match(rejectReason(ad(1, 10, { professional: true }), s, { now }), /profissional/);
   assert.match(rejectReason(ad(1, 10, { postedAt: now - 48 * 3600e3 }), s, { now }), /antigo/);
 });

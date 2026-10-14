@@ -1,0 +1,365 @@
+body {
+  padding: 0 24px 64px;
+}
+
+.topo,
+main,
+.pe {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 28px 0 22px;
+  border-bottom: 2px solid var(--tinta);
+}
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.marca h1 {
+  font-family: var(--letreiro);
+  font-weight: 900;
+  font-size: 34px;
+  line-height: 1;
+}
+
+.bloco {
+  padding: 30px 0 32px;
+  border-bottom: 1px solid var(--linha);
+}
+.bloco h2 {
+  font-family: var(--letreiro);
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 1.05;
+}
+.intro {
+  max-width: 62ch;
+  margin-top: 8px;
+  color: var(--tinta-2);
+}
+
+/* Campos */
+input:not([type="checkbox"]),
+select,
+textarea {
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 10px;
+  border: 1.5px solid var(--linha);
+  border-radius: 6px;
+  background: var(--papel);
+}
+input:not([type="checkbox"]):hover,
+select:hover,
+textarea:hover {
+  border-color: var(--tinta-3);
+}
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--tinta);
+  outline: none;
+}
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 2px 0 0;
+  accent-color: var(--tinta);
+  flex: none;
+}
+textarea {
+  resize: vertical;
+  line-height: 1.5;
+}
+.campo {
+  display: grid;
+  gap: 4px;
+}
+.campo > span {
+  font-size: var(--t-sm);
+  font-weight: 700;
+}
+.erro-campo {
+  margin-top: 8px;
+  color: var(--caneta);
+  font-size: var(--t-sm);
+}
+
+.adicionar {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+.adicionar .btn {
+  min-height: 40px;
+}
+
+/* Lista de buscas */
+.buscas {
+  margin-top: 18px;
+  border-top: 1px solid var(--linha);
+}
+.busca {
+  border-bottom: 1px solid var(--linha);
+}
+.busca summary {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 12px;
+  padding: 12px 4px 12px 26px;
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+}
+.busca summary::-webkit-details-marker {
+  display: none;
+}
+.busca summary::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 19px;
+  border: 5px solid transparent;
+  border-left: 7px solid var(--tinta-3);
+  transition: transform 120ms ease;
+  transform-origin: 3px 5px;
+}
+.busca[open] summary::before {
+  transform: rotate(90deg);
+}
+.busca summary:hover .busca-nome {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.busca-nome {
+  font-weight: 700;
+}
+.busca-teto {
+  font-family: var(--letreiro);
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--tinta-2);
+}
+.busca-status {
+  grid-column: 1 / -1;
+  font-size: var(--t-sm);
+  color: var(--tinta-3);
+}
+.busca-status.erro {
+  color: var(--caneta);
+}
+.busca.pausada .busca-nome {
+  font-weight: 400;
+  color: var(--tinta-3);
+}
+.busca:target summary,
+.busca.destaque summary {
+  background: color-mix(in srgb, var(--etiqueta) 35%, transparent);
+}
+
+.busca-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 16px;
+  padding: 6px 4px 22px 26px;
+}
+.largo {
+  grid-column: 1 / -1;
+}
+.busca-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+.busca-acoes .remover {
+  margin-left: auto;
+  color: var(--caneta);
+}
+.busca-acoes .remover.confirmar {
+  font-weight: 700;
+}
+
+.vazio {
+  margin-top: 16px;
+  padding: 16px;
+  border: 1.5px dashed var(--linha);
+  border-radius: 6px;
+  color: var(--tinta-2);
+}
+
+/* Opcoes com checkbox */
+.opcoes {
+  display: grid;
+  gap: 14px;
+  margin-top: 16px;
+}
+.opcao {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--tinta-2);
+  cursor: pointer;
+}
+.opcao b {
+  color: var(--tinta);
+}
+
+/* Canais do celular */
+.canal {
+  margin-top: 20px;
+  padding: 18px 20px 20px;
+  border: 1.5px solid var(--linha);
+  border-radius: 8px;
+}
+.canal.ativo {
+  border-color: var(--tinta);
+}
+.canal-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.canal h3 {
+  font-family: var(--letreiro);
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 1;
+}
+.chave {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--t-sm);
+  font-weight: 700;
+  cursor: pointer;
+}
+.canal-desc {
+  margin-top: 6px;
+  color: var(--tinta-2);
+}
+.passos {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0 0;
+  padding-left: 22px;
+}
+.passos li::marker {
+  font-family: var(--letreiro);
+  font-weight: 800;
+}
+.passos .campo,
+.passos .canal-acoes {
+  margin-top: 8px;
+}
+code {
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--superficie);
+  font-size: 0.92em;
+}
+
+.ntfy-grade {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  align-items: start;
+}
+.qr {
+  justify-self: start;
+  width: max-content;
+  margin: 14px 0 0;
+  padding: 8px;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px var(--linha);
+  line-height: 0;
+}
+.qr svg {
+  width: 132px;
+  height: 132px;
+}
+
+.campo-linha {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+.campo-linha .campo {
+  flex: 1;
+}
+.campo-linha .btn {
+  min-height: 40px;
+}
+#ntfy-topico {
+  font-variant-numeric: tabular-nums;
+}
+.nota {
+  margin-top: 6px;
+  font-size: var(--t-sm);
+  color: var(--tinta-3);
+}
+.avancado {
+  margin-top: 12px;
+  font-size: var(--t-sm);
+}
+.avancado summary {
+  cursor: pointer;
+  color: var(--tinta-2);
+}
+.avancado .campo {
+  margin-top: 8px;
+}
+.canal-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+.salvo {
+  font-size: var(--t-sm);
+  color: var(--tinta-2);
+}
+.salvo.ok {
+  color: var(--verde);
+}
+.salvo.erro {
+  color: var(--caneta);
+}
+
+#bloqueadas {
+  margin-top: 14px;
+}
+
+.pe {
+  padding-top: 24px;
+}
+
+@media (max-width: 620px) {
+  body {
+    padding: 0 16px 48px;
+  }
+  .topo {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .busca-form,
+  .ntfy-grade {
+    grid-template-columns: 1fr;
+  }
+  .adicionar,
+  .campo-linha {
+    flex-wrap: wrap;
+  }
+}

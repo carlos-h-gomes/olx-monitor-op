@@ -1,0 +1,191 @@
+body {
+  width: 360px;
+  font-size: var(--t-sm);
+}
+
+.cabeca {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--linha);
+}
+.cabeca h1 {
+  flex: 1;
+  font-size: var(--t-md);
+  font-weight: 700;
+}
+.estado {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 10px;
+  border: 1px solid var(--linha);
+  border-radius: 999px;
+  background: transparent;
+  font-size: var(--t-xs);
+  cursor: pointer;
+}
+.estado:hover {
+  border-color: var(--tinta-3);
+}
+.ponto {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--verde);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--verde) 22%, transparent);
+}
+.estado[aria-pressed="true"] .ponto {
+  background: var(--tinta-3);
+  box-shadow: none;
+}
+
+/* Bloco de acao quando a aba atual e uma busca da OLX */
+.esta-busca {
+  display: grid;
+  gap: 8px;
+  margin: 12px 14px 4px;
+  padding: 12px 14px 14px;
+  border-radius: 6px;
+  background: var(--etiqueta);
+  color: #182033;
+}
+.esta-rotulo {
+  font-size: var(--t-xs);
+  color: #4a4f2a;
+}
+.esta-nome {
+  font-family: var(--letreiro);
+  font-weight: 900;
+  font-size: 26px;
+  line-height: 1;
+}
+.esta-busca .btn-cheio {
+  background: #182033;
+  border-color: #182033;
+  color: #fff;
+}
+.esta-busca .discreto {
+  color: #4a4f2a;
+}
+
+.primeiro {
+  display: grid;
+  gap: 8px;
+  padding: 16px 14px 8px;
+  line-height: 1.45;
+}
+.primeiro-titulo {
+  font-family: var(--letreiro);
+  font-weight: 900;
+  font-size: 26px;
+  line-height: 1;
+}
+.primeiro .btn {
+  justify-self: start;
+  margin-top: 4px;
+}
+
+.secao {
+  padding: 14px 14px 6px;
+  font-size: var(--t-xs);
+  font-weight: 700;
+  color: var(--tinta-3);
+}
+
+.lista {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.lista li + li {
+  border-top: 1px solid var(--linha);
+}
+.item {
+  display: grid;
+  width: 100%;
+  padding: 9px 14px;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+.item:hover {
+  background: var(--superficie);
+}
+
+/* Linha de busca */
+.busca {
+  grid-template-columns: 1fr auto;
+  gap: 2px 10px;
+}
+.busca-nome {
+  font-weight: 700;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.busca-teto {
+  color: var(--tinta-2);
+  font-family: var(--letreiro);
+  font-weight: 800;
+  font-size: 16px;
+}
+.busca-status {
+  grid-column: 1 / -1;
+  color: var(--tinta-3);
+  font-size: var(--t-xs);
+}
+.busca-status.erro {
+  color: var(--caneta);
+}
+.busca.pausada .busca-nome {
+  color: var(--tinta-3);
+  font-weight: 400;
+}
+
+/* Linha de achado */
+.achado {
+  grid-template-columns: 44px 1fr auto;
+  align-items: center;
+  gap: 10px;
+}
+.achado-foto {
+  width: 44px;
+  height: 44px;
+  border-radius: 4px;
+  object-fit: cover;
+  background: var(--superficie);
+}
+.achado-texto {
+  min-width: 0;
+}
+.achado-titulo {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.achado-quando {
+  color: var(--tinta-3);
+  font-size: var(--t-xs);
+}
+.achado-preco {
+  display: grid;
+  justify-items: end;
+  gap: 3px;
+}
+.achado-preco .preco {
+  font-size: 22px;
+  color: var(--caneta);
+}
+
+.rodape {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  padding: 10px 14px 12px;
+  border-top: 1px solid var(--linha);
+}

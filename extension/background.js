@@ -3,7 +3,7 @@
 import { siteById } from "./lib/sites/index.js";
 import { processAds } from "./lib/monitor.js";
 import { brl } from "./lib/format.js";
-import { headline, plainMessage, sendNtfy, sendTelegram } from "./lib/notify.js";
+import { findTelegramChat, headline, plainMessage, sendNtfy, sendTelegram } from "./lib/notify.js";
 import * as store from "./lib/store.js";
 
 const TICK = "tick";
@@ -142,15 +142,14 @@ async function showAlertWindow() {
   } catch {
     // sem janela aberta: deixa o Chrome posicionar
   }
-  const win = await chrome.windows.create({
-    url: chrome.runtime.getURL("alert/alert.html"),
-    type: "popup",
-    focused: true,
-    width,
-    height,
-    left,
-    top,
-  });
+  const base = { url: chrome.runtime.getURL("alert/alert.html"), type: "popup", focused: true, width, height };
+  let win;
+  try {
+    win = await chrome.windows.create({ ...base, left, top });
+  } catch {
+    // posicao fora da area visivel (ex.: varios monitores): deixa o Chrome escolher
+    win = await chrome.windows.create(base);
+  }
   await chrome.storage.session.set({ alertWin: win.id });
 }
 
@@ -251,6 +250,9 @@ const handlers = {
   async dismiss({ key }) {
     await setQueue((await getQueue()).filter((q) => q.key !== key));
     return { ok: true };
+  },
+  async tgConnect({ token }) {
+    return { ok: true, ...(await findTelegramChat(token)) };
   },
   async dismissAll() {
     await setQueue([]);

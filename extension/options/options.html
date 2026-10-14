@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Configurações do Olx Monitor</title>
+  <link rel="stylesheet" href="../styles/base.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="marca">
+      <img src="../icons/icon-48.png" width="36" height="36" alt="">
+      <div>
+        <h1>Olx Monitor</h1>
+        <p class="discreto">Tudo o que você configura aqui fica só neste navegador.</p>
+      </div>
+    </div>
+    <button class="btn" id="exemplo">Ver alerta de exemplo</button>
+  </header>
+
+  <main>
+    <!-- Buscas -->
+    <section class="bloco" aria-labelledby="t-buscas">
+      <h2 id="t-buscas">Buscas monitoradas</h2>
+      <p class="intro">
+        Faça a busca na OLX com os filtros que quiser (região, faixa de preço, entrega, condição).
+        Com a página aberta, clique no ícone da extensão e em <b>Monitorar esta busca</b>.
+        Ou cole o link aqui.
+      </p>
+      <form class="adicionar" id="form-adicionar">
+        <label class="visually-hidden" for="novo-link">Link da busca na OLX</label>
+        <input id="novo-link" type="url" placeholder="https://www.olx.com.br/..." autocomplete="off" required>
+        <button class="btn btn-cheio" type="submit">Adicionar</button>
+      </form>
+      <p class="erro-campo" id="erro-adicionar" role="alert" hidden></p>
+
+      <div id="buscas" class="buscas"></div>
+      <p class="vazio" id="sem-buscas" hidden>Nenhuma busca ainda. A primeira leitura só aprende o que já está anunciado; a partir daí, só anúncio novo vira alerta.</p>
+    </section>
+
+    <!-- Computador -->
+    <section class="bloco" aria-labelledby="t-pc">
+      <h2 id="t-pc">Alertas neste computador</h2>
+      <div class="opcoes">
+        <label class="opcao">
+          <input type="checkbox" data-setting="alertWindow">
+          <span><b>Abrir o anúncio na frente da tela</b><br>Uma janela com foto, preço e o botão para abrir na OLX.</span>
+        </label>
+        <label class="opcao">
+          <input type="checkbox" data-setting="sound">
+          <span><b>Tocar um aviso sonoro</b><br>Duas notas curtas. Preço suspeito toca um aviso mais grave.</span>
+        </label>
+        <label class="opcao">
+          <input type="checkbox" data-setting="systemNotification">
+          <span><b>Notificação do sistema</b><br>Aparece mesmo com o navegador minimizado.</span>
+        </label>
+      </div>
+      <p class="salvo" id="salvo-pc" aria-live="polite"></p>
+    </section>
+
+    <!-- Celular -->
+    <section class="bloco" aria-labelledby="t-cel">
+      <h2 id="t-cel">Alertas no celular</h2>
+      <p class="intro">Gratuito e sem cadastro no projeto. Escolha um dos dois, ou os dois.</p>
+
+      <article class="canal" id="canal-ntfy">
+        <header class="canal-topo">
+          <h3>ntfy</h3>
+          <label class="chave">
+            <input type="checkbox" id="ntfy-ativo">
+            <span>Enviar para o ntfy</span>
+          </label>
+        </header>
+        <p class="canal-desc">App aberto e gratuito, sem conta. Recebe a foto do anúncio e um botão para abrir.</p>
+        <div class="ntfy-grade">
+          <ol class="passos">
+            <li>Instale o app ntfy: <a href="https://play.google.com/store/apps/details?id=io.heckel.ntfy" target="_blank" rel="noreferrer">Android</a> ou <a href="https://apps.apple.com/app/ntfy/id1625396347" target="_blank" rel="noreferrer">iPhone</a>.</li>
+            <li>No Android, aponte a câmera para o código. No iPhone, toque em <b>+</b> no app e digite o tópico abaixo.</li>
+            <li>Mande um teste para ver chegando.</li>
+          </ol>
+          <figure class="qr" id="ntfy-qr" aria-label="Código para assinar o tópico no app ntfy"></figure>
+        </div>
+        <div class="campo-linha">
+          <label class="campo">
+            <span>Tópico</span>
+            <input id="ntfy-topico" spellcheck="false" autocomplete="off">
+          </label>
+          <button class="btn" id="ntfy-copiar" type="button">Copiar</button>
+          <button class="btn btn-texto" id="ntfy-novo" type="button">Gerar outro</button>
+        </div>
+        <p class="nota">Quem souber o nome do tópico consegue ler os alertas. Não troque por algo fácil de adivinhar.</p>
+        <details class="avancado">
+          <summary>Usar um servidor ntfy próprio</summary>
+          <label class="campo">
+            <span>Endereço do servidor</span>
+            <input id="ntfy-servidor" type="url" placeholder="https://ntfy.sh">
+          </label>
+        </details>
+        <div class="canal-acoes">
+          <button class="btn btn-cheio" id="ntfy-salvar" type="button">Salvar</button>
+          <button class="btn" id="ntfy-teste" type="button">Enviar teste</button>
+          <span class="salvo" id="ntfy-status" aria-live="polite"></span>
+        </div>
+      </article>
+
+      <article class="canal" id="canal-telegram">
+        <header class="canal-topo">
+          <h3>Telegram</h3>
+          <label class="chave">
+            <input type="checkbox" id="tg-ativo">
+            <span>Enviar para o Telegram</span>
+          </label>
+        </header>
+        <p class="canal-desc">Os alertas chegam por um bot que é seu. Ninguém mais tem acesso.</p>
+        <ol class="passos">
+          <li>No Telegram, abra o <a href="https://t.me/BotFather" target="_blank" rel="noreferrer">@BotFather</a>, mande <code>/newbot</code> e escolha um nome.</li>
+          <li>Ele responde com um token. Cole aqui:
+            <label class="campo">
+              <span class="visually-hidden">Token do bot</span>
+              <input id="tg-token" spellcheck="false" autocomplete="off" placeholder="123456789:AA...">
+            </label>
+          </li>
+          <li>Abra o seu bot no Telegram, mande um "oi" e clique em <b>Conectar</b>.
+            <div class="canal-acoes">
+              <button class="btn" id="tg-conectar" type="button">Conectar</button>
+              <span class="salvo" id="tg-chat"></span>
+            </div>
+          </li>
+        </ol>
+        <div class="canal-acoes">
+          <button class="btn btn-cheio" id="tg-salvar" type="button">Salvar</button>
+          <button class="btn" id="tg-teste" type="button">Enviar teste</button>
+          <span class="salvo" id="tg-status" aria-live="polite"></span>
+        </div>
+      </article>
+    </section>
+
+    <!-- Palavras -->
+    <section class="bloco" aria-labelledby="t-palavras">
+      <h2 id="t-palavras">Palavras bloqueadas em todas as buscas</h2>
+      <p class="intro">Anúncio com qualquer uma destas palavras no título nunca vira alerta. Acentos e maiúsculas não importam. Separe por vírgula.</p>
+      <textarea id="bloqueadas" rows="4" spellcheck="false"></textarea>
+      <div class="canal-acoes">
+        <button class="btn btn-cheio" id="salvar-bloqueadas" type="button">Salvar palavras</button>
+        <button class="btn btn-texto" id="restaurar-bloqueadas" type="button">Voltar para a lista padrão</button>
+        <span class="salvo" id="bloqueadas-status" aria-live="polite"></span>
+      </div>
+    </section>
+
+    <!-- Dados -->
+    <section class="bloco" aria-labelledby="t-dados">
+      <h2 id="t-dados">Seus dados</h2>
+      <p class="intro">
+        A extensão guarda as buscas, os anúncios já vistos (para calcular a média e não repetir alerta) e os últimos achados.
+        Nada sai deste navegador, exceto os alertas que você mandar para o ntfy ou o Telegram.
+      </p>
+      <div class="canal-acoes">
+        <button class="btn" id="limpar-achados" type="button">Limpar achados recentes</button>
+        <button class="btn btn-perigo" id="reaprender" type="button">Esquecer anúncios vistos</button>
+        <span class="salvo" id="dados-status" aria-live="polite"></span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pe discreto">
+    Olx Monitor OP, versão <span id="versao"></span>. Projeto independente, sem ligação com a OLX.
+  </footer>
+
+  <template id="tpl-busca">
+    <details class="busca">
+      <summary>
+        <span class="busca-nome"></span>
+        <span class="busca-teto"></span>
+        <span class="busca-status"></span>
+      </summary>
+      <form class="busca-form">
+        <label class="campo largo">
+          <span>Nome</span>
+          <input name="name" required maxlength="60">
+        </label>
+        <label class="campo largo">
+          <span>Link da busca</span>
+          <input name="url" type="url" required spellcheck="false">
+        </label>
+        <label class="campo">
+          <span>Preço máximo</span>
+          <input name="maxPrice" inputmode="numeric" placeholder="Sem limite">
+        </label>
+        <label class="campo">
+          <span>Preço mínimo</span>
+          <input name="minPrice" inputmode="numeric" placeholder="Sem mínimo">
+        </label>
+        <label class="campo largo">
+          <span>Precisa ter no título</span>
+          <input name="required" placeholder="ex.: 3090, 24gb">
+        </label>
+        <label class="campo largo">
+          <span>Bloquear se tiver no título</span>
+          <input name="blocked" placeholder="ex.: notebook, mineração">
+        </label>
+        <label class="campo">
+          <span>Ler a busca a cada</span>
+          <select name="intervalMin">
+            <option value="5">5 minutos</option>
+            <option value="10">10 minutos</option>
+            <option value="15">15 minutos</option>
+            <option value="30">30 minutos</option>
+            <option value="60">1 hora</option>
+          </select>
+        </label>
+        <label class="campo">
+          <span>Avisar anúncios publicados há até</span>
+          <select name="maxAgeHours">
+            <option value="1">1 hora</option>
+            <option value="6">6 horas</option>
+            <option value="24">24 horas</option>
+            <option value="72">3 dias</option>
+          </select>
+        </label>
+        <label class="opcao largo">
+          <input type="checkbox" name="onlyPrivate">
+          <span>Só vendedor particular (ignora lojas)</span>
+        </label>
+        <label class="opcao largo">
+          <input type="checkbox" name="active">
+          <span>Busca ativa</span>
+        </label>
+        <div class="busca-acoes largo">
+          <button class="btn btn-cheio" type="submit">Salvar</button>
+          <button class="btn" type="button" data-acao="verificar">Verificar agora</button>
+          <a class="btn btn-texto" data-acao="abrir" target="_blank" rel="noreferrer">Ver na OLX</a>
+          <button class="btn btn-texto remover" type="button" data-acao="remover">Remover busca</button>
+          <span class="salvo" aria-live="polite"></span>
+        </div>
+      </form>
+    </details>
+  </template>
+
+  <script src="../vendor/qrcode.js"></script>
+  <script type="module" src="options.js"></script>
+</body>
+</html>

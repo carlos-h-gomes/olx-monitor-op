@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Olx Monitor OP</title>
+  <link rel="stylesheet" href="../styles/base.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="cabeca">
+    <img src="../icons/icon-32.png" width="22" height="22" alt="">
+    <h1>Olx Monitor</h1>
+    <button class="estado" id="estado" aria-pressed="false">
+      <span class="ponto" aria-hidden="true"></span><span id="estado-texto">Vigiando</span>
+    </button>
+  </header>
+
+  <section class="esta-busca" id="esta-busca" hidden>
+    <p class="esta-rotulo">Você está numa busca da OLX</p>
+    <p class="esta-nome" id="esta-nome"></p>
+    <button class="btn btn-cheio" id="monitorar">Monitorar esta busca</button>
+    <p class="discreto" id="esta-ja" hidden>Esta busca já está sendo monitorada.</p>
+  </section>
+
+  <section class="primeiro" id="primeiro" hidden>
+    <p class="primeiro-titulo">Comece pela OLX</p>
+    <p>Faça a busca, aplique os filtros que quiser (região, preço, entrega) e clique neste ícone de novo para monitorar.</p>
+    <a class="btn" href="https://www.olx.com.br/" target="_blank" rel="noreferrer">Abrir a OLX</a>
+  </section>
+
+  <section id="bloco-buscas" hidden>
+    <h2 class="secao">Buscas</h2>
+    <ul class="lista" id="buscas"></ul>
+  </section>
+
+  <section id="bloco-achados" hidden>
+    <h2 class="secao">Achados recentes</h2>
+    <ul class="lista" id="achados"></ul>
+  </section>
+
+  <footer class="rodape">
+    <button class="btn" id="verificar">Verificar agora</button>
+    <button class="btn btn-texto" id="config">Configurações</button>
+  </footer>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

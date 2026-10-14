@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anúncio novo</title>
+  <link rel="stylesheet" href="../styles/base.css">
+  <link rel="stylesheet" href="alert.css">
+</head>
+<body>
+  <main id="app" aria-live="polite">
+    <header class="topo">
+      <p class="busca" id="busca"></p>
+      <nav class="paginacao" id="paginacao" hidden>
+        <button class="seta" id="anterior" aria-label="Anúncio anterior">‹</button>
+        <span id="contador"></span>
+        <button class="seta" id="proximo" aria-label="Próximo anúncio">›</button>
+      </nav>
+    </header>
+
+    <figure class="foto" id="foto">
+      <img id="imagem" alt="" hidden>
+      <span class="sem-foto" id="sem-foto">Sem foto</span>
+      <span class="selo-exemplo" id="selo-exemplo" hidden>Exemplo</span>
+    </figure>
+
+    <section class="cartaz">
+      <div class="etiqueta" id="etiqueta">
+        <span class="furo" aria-hidden="true"></span>
+        <p class="preco valor" id="preco"></p>
+        <p class="media" id="media"></p>
+      </div>
+
+      <h1 class="chamada" id="chamada"></h1>
+      <p class="aviso-golpe" id="aviso-golpe" hidden>
+        Bem abaixo da média desta busca. Nunca pague fora da OLX, não faça Pix antecipado e desconfie de pressa.
+      </p>
+
+      <h2 class="titulo" id="titulo"></h2>
+      <p class="onde" id="onde"></p>
+      <ul class="fatos" id="fatos"></ul>
+    </section>
+
+    <footer class="acoes">
+      <button class="btn btn-cheio abrir" id="abrir">Abrir anúncio</button>
+      <button class="btn btn-texto" id="dispensar">Dispensar</button>
+    </footer>
+  </main>
+
+  <main id="vazio" class="vazio" hidden>
+    <p class="preco">Tudo visto.</p>
+    <p class="discreto">Quando aparecer outro anúncio, esta janela abre de novo.</p>
+    <button class="btn" id="fechar">Fechar janela</button>
+  </main>
+
+  <script type="module" src="alert.js"></script>
+</body>
+</html>

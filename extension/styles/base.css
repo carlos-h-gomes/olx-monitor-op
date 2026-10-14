@@ -1,0 +1,208 @@
+/* Base visual compartilhada. Referencia: cartaz de oferta de mercado e feira.
+   Uma etiqueta amarela, preco em letra de letreiro, caneta vermelha. O resto e quieto. */
+
+@font-face {
+  font-family: "Letreiro";
+  src: url("../fonts/big-shoulders-display-latin-800-normal.woff2") format("woff2");
+  font-weight: 800;
+  font-display: block;
+}
+@font-face {
+  font-family: "Letreiro";
+  src: url("../fonts/big-shoulders-display-latin-900-normal.woff2") format("woff2");
+  font-weight: 900;
+  font-display: block;
+}
+@font-face {
+  font-family: "Leitura";
+  src: url("../fonts/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Leitura";
+  src: url("../fonts/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2");
+  font-weight: 700;
+}
+
+:root {
+  --tinta: #182033;
+  --tinta-2: #4a5468;
+  --tinta-3: #7b8496;
+  --papel: #ffffff;
+  --superficie: #f1f3f6;
+  --linha: #dde1e8;
+  --etiqueta: #ffe53b;
+  --etiqueta-borda: #e9c900;
+  --caneta: #d7261e;
+  --caneta-fundo: #fdecea;
+  --verde: #1c8c5e;
+  --foco: #2f6fdf;
+
+  --letreiro: "Letreiro", "Arial Narrow", sans-serif;
+  --leitura: "Leitura", system-ui, sans-serif;
+
+  --t-xs: 12px;
+  --t-sm: 13px;
+  --t-md: 15px;
+  --t-lg: 18px;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --tinta: #eef0f4;
+    --tinta-2: #b6bdcb;
+    --tinta-3: #8a93a5;
+    --papel: #1b1f29;
+    --superficie: #242a36;
+    --linha: #343b4a;
+    --caneta: #ff5a4f;
+    --caneta-fundo: #3a2024;
+    --verde: #3fbf8a;
+    --foco: #7aa7ff;
+    color-scheme: dark;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  font: 400 var(--t-md) / 1.45 var(--leitura);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--foco);
+  outline-offset: 2px;
+}
+
+/* Botoes: um principal (tinta cheia), um secundario (contorno), um de texto. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 0 16px;
+  border: 1.5px solid var(--tinta);
+  border-radius: 6px;
+  background: var(--papel);
+  color: var(--tinta);
+  font-weight: 700;
+  font-size: var(--t-sm);
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn:hover {
+  background: var(--superficie);
+}
+.btn-cheio {
+  background: var(--tinta);
+  color: var(--papel);
+}
+.btn-cheio:hover {
+  background: var(--tinta-2);
+  border-color: var(--tinta-2);
+}
+.btn-texto {
+  border-color: transparent;
+  background: transparent;
+  padding: 0 8px;
+  color: var(--tinta-2);
+  font-weight: 400;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.btn-texto:hover {
+  background: transparent;
+  color: var(--tinta);
+}
+.btn-perigo {
+  border-color: var(--caneta);
+  color: var(--caneta);
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* Preco no estilo cartaz */
+.preco {
+  font-family: var(--letreiro);
+  font-weight: 900;
+  letter-spacing: 0.005em;
+  line-height: 0.9;
+  font-variant-numeric: lining-nums;
+}
+
+.desconto {
+  display: inline-block;
+  padding: 1px 6px 0;
+  border-radius: 3px;
+  background: var(--caneta);
+  color: #fff;
+  font-family: var(--letreiro);
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 1.3;
+}
+.desconto.suspeito {
+  background: transparent;
+  color: var(--caneta);
+  box-shadow: inset 0 0 0 1.5px var(--caneta);
+}
+
+.discreto {
+  color: var(--tinta-3);
+  font-size: var(--t-sm);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
