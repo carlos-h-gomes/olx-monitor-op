@@ -2,7 +2,7 @@
 
 Extensão para Chrome e Edge que vigia as suas buscas da OLX e coloca na sua tela, na hora, o anúncio novo que vale a pena. Também avisa no celular, de graça.
 
-![Demonstração: monitorar uma busca, alerta de anúncio abaixo da média e alerta de preço suspeito](docs/demo.gif)
+![Demonstração: monitorar uma busca, alerta de anúncio abaixo da média, alerta de preço suspeito e notificação no celular](docs/demo.gif)
 
 **[Baixar a última versão](https://github.com/carlos-h-gomes/olx-monitor-op/releases/latest)**
 
