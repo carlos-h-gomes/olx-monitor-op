@@ -1,0 +1,7 @@
+#!/bin/sh
+# Bloqueia o commit se algum arquivo staged tiver dado pessoal ou segredo.
+node scripts/public-guard.mjs --staged || {
+  echo ""
+  echo "Commit bloqueado pelo public-guard. Corrija os itens acima."
+  exit 1
+}

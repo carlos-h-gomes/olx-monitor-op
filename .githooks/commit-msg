@@ -1,0 +1,10 @@
+#!/bin/sh
+# Remove da mensagem de commit qualquer assinatura automatica de agente de IA
+# (Co-Authored-By do Claude, link de sessao, "Generated with Claude Code").
+# O commit fica so com o autor configurado no git.
+MSG_FILE="$1"
+TMP="$MSG_FILE.clean"
+grep -viE '^(co-authored-by:.*(claude|anthropic|codex|openai|copilot)|claude-session:|.*generated with \[?claude code|https://claude\.(ai|com)/code)' "$MSG_FILE" > "$TMP"
+# remove linhas em branco sobrando no final
+awk 'NF{for(i=0;i<b;i++)print "";b=0;print;next}{b++}' "$TMP" > "$MSG_FILE"
+rm -f "$TMP"

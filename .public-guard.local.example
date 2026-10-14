@@ -1,0 +1,10 @@
+# Copie este arquivo para ".public-guard.local" (ele e ignorado pelo git)
+# e coloque um termo pessoal por linha. O guard bloqueia qualquer arquivo
+# publico que contenha um desses termos (sem diferenciar maiusculas).
+#
+# Exemplos (troque pelos seus):
+# seu-nome
+# seu-sobrenome
+# seu-usuario-da-vps
+# nome-da-sua-rede-docker
+# seu-topico-ntfy

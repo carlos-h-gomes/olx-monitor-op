@@ -1,0 +1,13 @@
+name: public-guard
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verifica dados pessoais e segredos
+        run: node scripts/public-guard.mjs

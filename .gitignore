@@ -1,0 +1,53 @@
+# ------------------------------------------------------------
+# Olx Monitor OP: tudo que NAO pode ir pro repositorio publico
+# ------------------------------------------------------------
+
+# Segredos e configuracao local
+config.yaml
+config.yml
+.env
+.env.*
+!.env.example
+*.local
+*.local.*
+!*.local.example
+.public-guard.local
+
+# Chaves de empacotamento da extensao (Chrome gera um .pem no "Pack extension")
+*.pem
+*.key
+*.crx
+*.xpi
+*.zip
+
+# Dados de runtime
+*.sqlite
+*.sqlite3
+*.db
+*.log
+logs/
+data/
+browser-profile/
+
+# Governanca/IA privada (fica fora do repo publico)
+AGENTS.md
+CLAUDE.md
+.agents/
+.claude/
+docs/ai/
+prompt-templates/
+
+# Dependencias e build
+node_modules/
+dist/
+build/
+.venv/
+__pycache__/
+
+# Editor e sistema
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
