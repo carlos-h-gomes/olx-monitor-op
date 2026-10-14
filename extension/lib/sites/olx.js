@@ -43,10 +43,14 @@ export function isSearchUrl(url) {
 }
 
 // Garante ordenacao por "mais recentes" (sf=1) e sempre a primeira pagina.
+// "sp" (ordenar por preco) tem prioridade sobre "sf" na OLX, entao sai do link:
+// com ele, anuncio novo e caro pode nunca aparecer na primeira pagina.
+// O "mais barato" e coberto pelo preco maximo e pela comparacao com a media.
 export function normalizeSearchUrl(url) {
   const u = new URL(url);
   u.hash = "";
   u.searchParams.delete("o");
+  u.searchParams.delete("sp");
   u.searchParams.set("sf", "1");
   return u.toString();
 }

@@ -50,6 +50,16 @@ async function checkSearch(search, settings) {
   const site = siteById(search.site);
   const now = Date.now();
   const patch = { lastCheck: now };
+
+  // Link salvo por versao anterior (ex.: com ordenacao por preco): corrige e
+  // reaprende, senao anuncios antigos chegariam como novos.
+  const fixedUrl = site.normalizeSearchUrl(search.url);
+  if (fixedUrl !== search.url) {
+    search = { ...search, url: fixedUrl, warm: false };
+    await store.saveSeen(search.id, {});
+    patch.url = fixedUrl;
+    patch.warm = false;
+  }
   try {
     const res = await fetch(search.url, { credentials: "include", cache: "no-store", headers: { Accept: "text/html" } });
     if (res.status === 403 || res.status === 429) throw new site.BlockedError();

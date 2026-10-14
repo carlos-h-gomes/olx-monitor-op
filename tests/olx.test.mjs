@@ -45,6 +45,13 @@ test("URL: so aceita OLX e forca ordem por mais recentes na primeira pagina", ()
   assert.equal(u.hash, "");
 });
 
+test("URL: remove ordenacao por preco, que tem prioridade sobre mais recentes", () => {
+  const u = new URL(olx.normalizeSearchUrl("https://www.olx.com.br/brasil?q=9800x3d&sp=1&opst=2&sf=1"));
+  assert.equal(u.searchParams.get("sp"), null);
+  assert.equal(u.searchParams.get("sf"), "1");
+  assert.equal(u.searchParams.get("opst"), "2");
+});
+
 test("URL de anuncio individual nao conta como busca", () => {
   assert.equal(olx.isSearchUrl("https://sp.olx.com.br/regiao/informatica/produto-1534301467"), false);
   assert.equal(olx.isSearchUrl("https://www.olx.com.br/informatica/processadores?q=ryzen"), true);
