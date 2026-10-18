@@ -31,7 +31,7 @@ A página de configurações abre sozinha na primeira vez.
 
 ### Atualizar
 
-Baixe o ZIP da versão nova, substitua o conteúdo da pasta e clique no botão de recarregar da extensão em `chrome://extensions`. Suas buscas e configurações continuam lá.
+Baixe o ZIP da versão nova, substitua o conteúdo da pasta e clique no botão de recarregar da extensão em `chrome://extensions`. Suas buscas e configurações continuam lá. O que mudou em cada versão está em [CHANGELOG.md](CHANGELOG.md).
 
 ## Como usar
 

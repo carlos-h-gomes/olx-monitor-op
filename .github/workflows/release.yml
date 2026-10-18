@@ -39,6 +39,19 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "$GITHUB_REF_NAME" "dist/olx-monitor-op-${GITHUB_REF_NAME}.zip" \
-            --title "Olx Monitor OP ${GITHUB_REF_NAME}" \
-            --notes "Baixe o arquivo **olx-monitor-op-${GITHUB_REF_NAME}.zip** abaixo, descompacte e carregue a pasta **olx-monitor-op** em chrome://extensions (Modo do desenvolvedor > Carregar sem compactação). Passo a passo no [README](https://github.com/${GITHUB_REPOSITORY}#instalação)."
+          VERSION="${GITHUB_REF_NAME#v}"
+          ZIP="olx-monitor-op-${GITHUB_REF_NAME}.zip"
+          INSTALL="Baixe o arquivo **${ZIP}** abaixo, descompacte e carregue a pasta **olx-monitor-op** em chrome://extensions (Modo do desenvolvedor > Carregar sem compactação). Passo a passo no [README](https://github.com/${GITHUB_REPOSITORY}#instalação)."
+
+          # Usa a secao da versao no CHANGELOG.md. Sem ela, o GitHub lista os commits.
+          awk -v v="$VERSION" '
+            /^## / { if (found) exit; if ($2 == v) { found = 1; next } }
+            found { print }
+          ' CHANGELOG.md > changes.md
+
+          if grep -q '[^[:space:]]' changes.md; then
+            { cat changes.md; printf '\n## Como instalar\n\n%s\n' "$INSTALL"; } > notes.md
+            gh release create "$GITHUB_REF_NAME" "dist/${ZIP}" --title "Olx Monitor OP ${GITHUB_REF_NAME}" --notes-file notes.md
+          else
+            gh release create "$GITHUB_REF_NAME" "dist/${ZIP}" --title "Olx Monitor OP ${GITHUB_REF_NAME}" --notes "$INSTALL" --generate-notes
+          fi
