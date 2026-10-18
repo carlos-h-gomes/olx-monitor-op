@@ -3,7 +3,7 @@
   "name": "Olx Monitor OP",
   "short_name": "Olx Monitor",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwzw47sWEa+6am79SYF3S4z+5c4tZok7BoC+x1QhHYstKeZkJLvQ2gb5zKCkImMgS5Vbk3WGa5NXwfmdkL1wY9MYiv4GyOfDNBO+HJWerqXaEL3yWEj7uMAIPzsxALeOJi/PHPFlClpamFs4RR/5ogk5sRg2qnaddGbO5UHRhn14E3XgIrLL1ng4jNg+TaJdqA8/EUISp1cykHgpHxEkLtMaGbxkAWD3m65Sz0C5L5OKoGUJkMMH8hYJoWcMkWTI6rswuxB6NThQgYRHzpEmCQF95asxOFDk0ELtdrXrnRaZhL0BApHgafPNoRfmJr1eTKsdJz9QVTPsEKjfgAZgrgQIDAQAB",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Vigia as suas buscas da OLX e avisa na hora, na tela e no celular, quando aparece anúncio novo abaixo da média.",
   "minimum_chrome_version": "116",
   "icons": {

@@ -86,6 +86,11 @@ textarea {
   font-size: var(--t-sm);
   font-weight: 700;
 }
+.campo .ajuda {
+  color: var(--tinta-3);
+  font-size: var(--t-xs);
+  line-height: 1.45;
+}
 .erro-campo {
   margin-top: 8px;
   color: var(--caneta);
@@ -154,6 +159,25 @@ textarea {
 }
 .busca-status.erro {
   color: var(--caneta);
+}
+.busca-avisos {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+.busca-avisos[hidden] {
+  display: none;
+}
+.aviso {
+  padding: 2px 8px;
+  border-left: 3px solid var(--etiqueta-borda);
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--etiqueta) 18%, transparent);
+  color: var(--tinta-2);
+  font-size: var(--t-xs);
+  line-height: 1.5;
 }
 .busca.pausada .busca-nome {
   font-weight: 400;

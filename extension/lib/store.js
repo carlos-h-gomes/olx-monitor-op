@@ -76,11 +76,15 @@ export async function addFinds(items) {
   await local().set({ finds: unique });
 }
 
+export async function removeFind(key) {
+  await local().set({ finds: (await getFinds()).filter((f) => f.key !== key) });
+}
+
 export async function clearFinds() {
   await local().set({ finds: [] });
 }
 
-export function newSearch({ url, name, site }) {
+export function newSearch({ url, name, site, required = [] }) {
   return {
     id: crypto.randomUUID(),
     site,
@@ -91,7 +95,7 @@ export function newSearch({ url, name, site }) {
     intervalMin: MIN_INTERVAL,
     maxPrice: null,
     minPrice: null,
-    required: [],
+    required,
     blocked: [],
     onlyPrivate: false,
     maxAgeHours: 24,

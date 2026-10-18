@@ -37,8 +37,10 @@ Baixe o ZIP da versão nova, substitua o conteúdo da pasta e clique no botão d
 
 1. Abra a [OLX](https://www.olx.com.br), faça a busca e aplique os filtros.
 2. Clique no ícone da extensão e em **Monitorar esta busca**.
-3. Ajuste, se quiser, o preço máximo e as palavras na página de configurações.
+3. Ajuste, se quiser, o preço máximo e as palavras na página de configurações. As palavras da busca já entram como obrigatórias no título, porque a OLX também mostra anúncios que só citam o produto na categoria ou nos detalhes. Apague as que não precisar.
 4. Para testar sem esperar, clique em **Ver alerta de exemplo** nas configurações.
+
+Para tirar um achado da lista, use o **X** ao lado dele no ícone da extensão. **Limpar** remove todos.
 
 O navegador precisa estar aberto para a extensão trabalhar. Se a OLX pedir uma verificação ("confirme que você é humano"), abra o site uma vez nesse navegador e a leitura volta sozinha.
 

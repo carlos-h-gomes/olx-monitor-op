@@ -67,6 +67,40 @@ export function suggestName(url) {
   }
 }
 
+// Palavras da busca (q=) que fazem sentido exigir no titulo. A OLX tambem
+// casa a busca com categoria e atributos do anuncio (ex.: "Modelo: Nintendo
+// Switch"), entao sem isso passa anuncio fora do assunto mal categorizado.
+const IGNORED_WORDS = new Set([
+  "a", "o", "as", "os", "e", "de", "da", "do", "das", "dos", "em", "no", "na",
+  "com", "sem", "para", "pra", "por", "um", "uma", "novo", "nova", "usado", "usada",
+]);
+
+export function suggestRequired(url) {
+  try {
+    const q = new URL(url).searchParams.get("q") || "";
+    const words = q
+      .toLowerCase()
+      .split(/[\s,;+]+/)
+      .map((w) => w.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, ""))
+      .filter((w) => w.length >= 2 && !IGNORED_WORDS.has(w));
+    return [...new Set(words)];
+  } catch {
+    return [];
+  }
+}
+
+// Busca sem estado no caminho (ou com /brasil) cobre o pais inteiro.
+// Subdominio de estado (ex.: sp.olx.com.br) e link de anuncio, nao de busca.
+export function isNationwide(url) {
+  try {
+    const u = new URL(url);
+    if (u.hostname !== "olx.com.br" && u.hostname !== "www.olx.com.br") return false;
+    return !u.pathname.split("/").some((part) => /^estado-[a-z]{2}$/i.test(part));
+  } catch {
+    return false;
+  }
+}
+
 export function isBlockPage(html) {
   const head = html.slice(0, 20000).toLowerCase();
   return BLOCK_MARKERS.some((m) => head.includes(m));

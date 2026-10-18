@@ -1,4 +1,5 @@
-import { siteFor } from "../lib/sites/index.js";
+import { siteById, siteFor } from "../lib/sites/index.js";
+import { searchHints } from "../lib/hints.js";
 import { DEFAULT_BLOCKED } from "../lib/filters.js";
 import { brl, splitWords, timeAgo } from "../lib/format.js";
 import * as store from "../lib/store.js";
@@ -76,6 +77,17 @@ function fillSummary(node, s) {
   const el = node.querySelector(".busca-status");
   el.textContent = st.text;
   el.classList.toggle("erro", st.error);
+  const hints = searchHints(s, siteById(s.site));
+  const box = node.querySelector(".busca-avisos");
+  box.hidden = !hints.length;
+  box.replaceChildren(
+    ...hints.map((h) => {
+      const tag = document.createElement("span");
+      tag.className = "aviso";
+      tag.textContent = h.text;
+      return tag;
+    }),
+  );
 }
 
 function searchItem(s) {
@@ -173,7 +185,7 @@ $("form-adicionar").addEventListener("submit", async (e) => {
     err.hidden = false;
     return;
   }
-  const s = store.newSearch({ url, name: site.suggestName(url), site: site.id });
+  const s = store.newSearch({ url, name: site.suggestName(url), site: site.id, required: site.suggestRequired(url) });
   await store.upsertSearch(s);
   input.value = "";
   openIds.add(s.id);
